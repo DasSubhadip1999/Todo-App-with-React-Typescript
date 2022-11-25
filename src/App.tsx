@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import TodoProvider from "./context/todoContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Modal from "./components/Modal";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<Home />} />
           </Routes>
         </Router>
+        <Modal />
       </TodoProvider>
       <ToastContainer
         position="top-right"

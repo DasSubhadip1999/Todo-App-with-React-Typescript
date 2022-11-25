@@ -8,8 +8,15 @@ export interface Todo {
 }
 
 export type TodoContextType = {
+    formData : Todo,
+    setFormData : React.Dispatch<React.SetStateAction<Todo>>,
     todos: Todo[],
-    saveTodo: (todo: ITodo) => void,
-    updateTodo: (id: number) => void,
-    deleteTodo : (id : number) => void,
+    editMode : boolean,
+    saveTodo: (todo: Todo) => void,
+    editFn : (id : string) => void,
+    updateTodo: (id : string) => void,
+    deleteTodo : (id : string) => void,
+    setEditMode : React.Dispatch<React.SetStateAction<boolean>>,
+    setModalId : React.Dispatch<React.SetStateAction<string>>,
+    modal : (condition : boolean) => void,
 };

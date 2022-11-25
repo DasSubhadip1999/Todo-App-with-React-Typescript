@@ -11,9 +11,11 @@ const TodoList: React.FC = () => {
       <h1 className="text-center font-bold text-xl text-white py-3 bg-[#3F0071] stroke-slate-100">
         Todo List
       </h1>
-      {todoContext?.todos.map((todo) => (
-        <TodoListItem key={todo.id} {...todo} />
-      ))}
+      <div className="max-h-80 overflow-y-auto">
+        {todoContext?.todos.map((todo) => (
+          <TodoListItem key={todo.id} {...todo} />
+        ))}
+      </div>
     </div>
   );
 };

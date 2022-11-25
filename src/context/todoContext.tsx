@@ -9,6 +9,14 @@ interface Props {
 }
 
 const TodoProvider: React.FC<Props> = ({ children }) => {
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [formData, setFormData] = useState<Todo>({
+    id: uuidv4(),
+    title: "",
+    description: "",
+    isDone: false,
+  });
+
   const [todos, setTodos] = useState<Todo[]>([
     {
       id: uuidv4(),
@@ -18,16 +26,52 @@ const TodoProvider: React.FC<Props> = ({ children }) => {
     },
   ]);
 
+  const [modalId, setModalId] = useState<string>("");
+
   const saveTodo = (todo: Todo) => {
     setTodos((prevState) => [...prevState, todo]);
   };
 
-  const updateTodo = (id: number) => {};
+  const editFn = (id: string) => {
+    todos.forEach((todo: Todo) => {
+      if (todo.id === id) {
+        setFormData(todo);
+      }
+    });
+  };
 
-  const deleteTodo = (id: number) => {};
+  const updateTodo = (id: string) => {
+    setTodos((prevState) =>
+      prevState.map((todo) => (todo.id === id ? formData : todo))
+    );
+  };
+
+  const deleteTodo = (id: string) => {
+    setTodos((prevState) => prevState.filter((todo) => todo.id !== id));
+  };
+
+  const modal = (condition: boolean) => {
+    if (condition) {
+      deleteTodo(modalId);
+    }
+  };
 
   return (
-    <TodoContext.Provider value={{ saveTodo, updateTodo, deleteTodo, todos }}>
+    <TodoContext.Provider
+      value={{
+        saveTodo,
+        updateTodo,
+        deleteTodo,
+        setFormData,
+        editFn,
+        setEditMode,
+        setModalId,
+        modal,
+        todos,
+        editMode,
+        formData,
+      }}
+    >
       {children}
     </TodoContext.Provider>
   );
