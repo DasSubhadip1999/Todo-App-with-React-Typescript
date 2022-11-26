@@ -11,6 +11,7 @@ interface Props {
 }
 
 const TodoProvider: React.FC<Props> = ({ children }) => {
+  const [editId, setEditId] = useState<string>("");
   const [editMode, setEditMode] = useState<boolean>(false);
   const [formData, setFormData] = useState<Todo>({
     id: uuidv4(),
@@ -55,6 +56,7 @@ const TodoProvider: React.FC<Props> = ({ children }) => {
         setFormData(todo);
       }
     });
+    setEditId(id);
   };
 
   const updateTodo = async (id: string) => {
@@ -69,6 +71,11 @@ const TodoProvider: React.FC<Props> = ({ children }) => {
     // if (res.status !== 200) {
     //   toast.error("Something went wrong");
     // }
+  };
+
+  const todoDone = async (id: string, type: boolean) => {
+    const res = await axios.patch(`/todos/${id}`, { isDone: type });
+    //console.log(res.data);
   };
 
   const modal = (condition: boolean) => {
@@ -87,9 +94,12 @@ const TodoProvider: React.FC<Props> = ({ children }) => {
         editFn,
         setEditMode,
         setModalId,
+        setEditId,
         modal,
         getTodos,
         postTodos,
+        todoDone,
+        editId,
         todos,
         editMode,
         formData,

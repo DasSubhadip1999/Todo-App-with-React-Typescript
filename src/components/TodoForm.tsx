@@ -38,6 +38,7 @@ const TodoForm: React.FC = () => {
         description: "",
         isDone: false,
       });
+      todoContext.setEditMode(false);
     } else {
       toast.error("Please fill all details", {
         position: "top-right",
