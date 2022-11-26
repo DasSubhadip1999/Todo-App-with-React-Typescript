@@ -15,6 +15,7 @@
     "@types/uuid": "^8.3.4",
     "axios": "^1.2.0",
     "daisyui": "^2.42.1",
+    "dotenv": "^16.0.3",
     "framer-motion": "^7.6.12",
     "json-server": "^0.17.1",
     "react": "^18.2.0",
