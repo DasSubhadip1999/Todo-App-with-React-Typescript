@@ -1,6 +1,8 @@
 import React, { createContext, useState } from "react";
 import { TodoContextType, Todo } from "../@types/todo";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export const TodoContext = createContext<TodoContextType | null>(null);
 
@@ -18,13 +20,28 @@ const TodoProvider: React.FC<Props> = ({ children }) => {
   });
 
   const [todos, setTodos] = useState<Todo[]>([
-    {
-      id: uuidv4(),
-      title: "Test Title 1",
-      description: "Test description 1",
-      isDone: false,
-    },
+    // {
+    //   id: uuidv4(),
+    //   title: "Test Title 1",
+    //   description: "Test description 1",
+    //   isDone: false,
+    // },
   ]);
+
+  //get data from server
+  const getTodos = async () => {
+    const res = await axios.get("/todos");
+    //console.log(res.data);
+    setTodos(res.data);
+  };
+
+  //post todos to server
+  const postTodos = async (todo: Todo) => {
+    const res = await axios.post("/todos", todo);
+    // if (res.status !== 200) {
+    //   toast.error("Something went wrong");
+    // }
+  };
 
   const [modalId, setModalId] = useState<string>("");
 
@@ -40,14 +57,18 @@ const TodoProvider: React.FC<Props> = ({ children }) => {
     });
   };
 
-  const updateTodo = (id: string) => {
+  const updateTodo = async (id: string) => {
+    const res = await axios.put(`/todos/${id}`, formData);
     setTodos((prevState) =>
       prevState.map((todo) => (todo.id === id ? formData : todo))
     );
   };
 
-  const deleteTodo = (id: string) => {
-    setTodos((prevState) => prevState.filter((todo) => todo.id !== id));
+  const deleteTodo = async (id: string) => {
+    const res = await axios.delete(`/todos/${id}`);
+    // if (res.status !== 200) {
+    //   toast.error("Something went wrong");
+    // }
   };
 
   const modal = (condition: boolean) => {
@@ -67,6 +88,8 @@ const TodoProvider: React.FC<Props> = ({ children }) => {
         setEditMode,
         setModalId,
         modal,
+        getTodos,
+        postTodos,
         todos,
         editMode,
         formData,

@@ -4,12 +4,18 @@ import { BiEdit } from "react-icons/bi";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TodoContext } from "../context/todoContext";
+import { v4 as uuidv4 } from "uuid";
+//
 
 const TodoListItem = ({ title, description, id }: Todo) => {
   const todoContext = useContext(TodoContext);
 
   return (
-    <div className="mx-5 my-4 rounded-md p-2 bg-[#FB2576] text-white flex relative">
+    <div
+      className={`mx-5 my-4 rounded-md p-2  text-white flex relative ${
+        todoContext?.editMode ? "bg-[#3f0071]" : "bg-[#FB2576]"
+      }`}
+    >
       <div className="flex-1">
         <h1 className="font-semibold text-lg">{title}</h1>
         <p>{description}</p>
@@ -20,6 +26,14 @@ const TodoListItem = ({ title, description, id }: Todo) => {
           onClick={() => {
             todoContext?.setEditMode((prev) => !prev);
             todoContext?.editFn(id);
+            // if (todoContext?.editMode) {
+            //   todoContext?.setFormData({
+            //     id: uuidv4(),
+            //     title: "",
+            //     description: "",
+            //     isDone: false,
+            //   });
+            // }
           }}
         />
         <MdOutlineDoneOutline className="mx-2 cursor-pointer" />

@@ -1,10 +1,18 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { TodoContext } from "../context/todoContext";
 import TodoListItem from "./TodoListItem";
+//import { Todo } from "../@types/todo";
+import { AnimatePresence, motion } from "framer-motion";
 
 const TodoList: React.FC = () => {
-  //console.log(useContext(TodoContext));
+  // console.log(useContext(TodoContext));
   const todoContext = useContext(TodoContext);
+
+  //const { editMode : boolean } = useContext(TodoContext);
+
+  useEffect(() => {
+    todoContext?.getTodos();
+  }, [todoContext?.todos]);
 
   return (
     <div className="mt-4">
@@ -12,9 +20,18 @@ const TodoList: React.FC = () => {
         Todo List
       </h1>
       <div className="max-h-80 overflow-y-auto">
-        {todoContext?.todos.map((todo) => (
-          <TodoListItem key={todo.id} {...todo} />
-        ))}
+        <AnimatePresence>
+          {todoContext?.todos.map((todo) => (
+            <motion.div
+              key={todo.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <TodoListItem {...todo} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     </div>
   );

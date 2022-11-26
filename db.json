@@ -1,0 +1,16 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "Welcome to todo app",
+      "description": "Here you can add delete and modify your todos",
+      "isDone": false
+    },
+    {
+      "id": "3e8a3920-0cc6-4ec3-a3fd-5de60e9dc54c",
+      "title": "New Title",
+      "description": "description goes here",
+      "isDone": false
+    }
+  ]
+}

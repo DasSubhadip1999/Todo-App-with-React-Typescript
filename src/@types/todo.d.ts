@@ -19,4 +19,6 @@ export type TodoContextType = {
     setEditMode : React.Dispatch<React.SetStateAction<boolean>>,
     setModalId : React.Dispatch<React.SetStateAction<string>>,
     modal : (condition : boolean) => void,
+    getTodos : () => void,
+    postTodos : (todo : Todo) => void,
 };

@@ -20,7 +20,7 @@ const TodoForm: React.FC = () => {
       (formTexts?.title || formTexts?.description) &&
       !todoContext?.editMode
     ) {
-      todoContext?.saveTodo(todoContext?.formData);
+      todoContext?.postTodos(todoContext?.formData);
       todoContext?.setFormData({
         id: uuidv4(),
         title: "",
@@ -32,6 +32,12 @@ const TodoForm: React.FC = () => {
       todoContext?.editMode
     ) {
       todoContext.updateTodo(formTexts.id);
+      todoContext?.setFormData({
+        id: uuidv4(),
+        title: "",
+        description: "",
+        isDone: false,
+      });
     } else {
       toast.error("Please fill all details", {
         position: "top-right",
