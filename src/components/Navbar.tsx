@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return (
-    <div className="navbar text-white bg-[#3F0071] ">
+    <div className="navbar text-white bg-[#3F0071] md:px-[15%] sm:px-20">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost normal-case text-xl">
           Todo-App

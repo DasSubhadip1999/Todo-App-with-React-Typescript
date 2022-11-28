@@ -54,8 +54,8 @@ const TodoForm: React.FC = () => {
   };
 
   return (
-    <form className="ml-5 mt-2" onSubmit={onSubmit}>
-      <div className="form-control w-full max-w-xs">
+    <form className="ml-5 mt-2 md:my-6 md:mx-[15%]" onSubmit={onSubmit}>
+      <div className="form-control w-full max-w-xs md:max-w-full sm:max-w-[96%] lg:max-w-full">
         <label className="label">
           <span className="label-text text-white">Title</span>
         </label>
@@ -63,12 +63,12 @@ const TodoForm: React.FC = () => {
           type="text"
           name="title"
           placeholder="Type here"
-          className="input input-bordered w-full max-w-xs bg-[#150050] text-white"
+          className="input input-bordered w-full max-w-xs bg-[#150050] text-white md:max-w-full sm:max-w-full lg:max-w-full"
           value={formTexts?.title}
           onChange={onChange}
         />
       </div>
-      <div className="form-control w-full max-w-xs">
+      <div className="form-control w-full max-w-xs md:max-w-full sm:max-w-[96%] lg:max-w-full">
         <label className="label">
           <span className="label-text text-white">Description</span>
         </label>
@@ -76,14 +76,14 @@ const TodoForm: React.FC = () => {
           type="text"
           name="description"
           placeholder="Type here"
-          className="input input-bordered w-full max-w-xs bg-[#150050] text-white"
+          className="input input-bordered w-full max-w-xs bg-[#150050] text-white md:max-w-full sm:max-w-full lg:max-w-full"
           value={formTexts?.description}
           onChange={onChange}
         />
       </div>
       <button
         type="submit"
-        className="btn bg-[#000] border-[1px] border-white w-full max-w-xs my-3"
+        className="btn bg-[#000] border-[1px] border-white w-full max-w-xs my-3 md:max-w-full md:mt-5 sm:max-w-full lg:max-w-full"
       >
         Submit
       </button>

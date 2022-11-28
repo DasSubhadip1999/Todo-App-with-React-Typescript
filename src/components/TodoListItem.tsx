@@ -1,19 +1,17 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Todo } from "../@types/todo";
 import { BiEdit } from "react-icons/bi";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TodoContext } from "../context/todoContext";
 import { GrUndo } from "react-icons/gr";
-import { v4 as uuidv4 } from "uuid";
-//
 
 const TodoListItem = ({ title, description, id, isDone }: Todo) => {
   const todoContext = useContext(TodoContext);
 
   return (
     <div
-      className={`mx-5 my-4 rounded-md p-2  text-white flex relative ${
+      className={`mx-5 my-4 rounded-md p-2 md:py-3  text-white flex relative ${
         todoContext?.editMode && todoContext.editId === id
           ? "bg-[#3f0071]"
           : "bg-[#FB2576]"
@@ -29,14 +27,6 @@ const TodoListItem = ({ title, description, id, isDone }: Todo) => {
           onClick={() => {
             todoContext?.setEditMode((prev) => !prev);
             todoContext?.editFn(id);
-            // if (todoContext?.editMode) {
-            //   todoContext?.setFormData({
-            //     id: uuidv4(),
-            //     title: "",
-            //     description: "",
-            //     isDone: false,
-            //   });
-            // }
           }}
         />
         {isDone ? (

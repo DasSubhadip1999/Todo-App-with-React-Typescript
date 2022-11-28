@@ -2,7 +2,6 @@ import React, { createContext, useState } from "react";
 import { TodoContextType, Todo } from "../@types/todo";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-import { toast } from "react-toastify";
 
 export const TodoContext = createContext<TodoContextType | null>(null);
 
@@ -32,16 +31,16 @@ const TodoProvider: React.FC<Props> = ({ children }) => {
   //get data from server
   const getTodos = async () => {
     const res = await axios.get("/todos");
-    //console.log(res.data);
     setTodos(res.data);
   };
 
   //post todos to server
   const postTodos = async (todo: Todo) => {
     const res = await axios.post("/todos", todo);
-    // if (res.status !== 200) {
-    //   toast.error("Something went wrong");
-    // }
+
+    if (res.status === 400) {
+      console.log(res.data);
+    }
   };
 
   const [modalId, setModalId] = useState<string>("");
@@ -64,18 +63,23 @@ const TodoProvider: React.FC<Props> = ({ children }) => {
     setTodos((prevState) =>
       prevState.map((todo) => (todo.id === id ? formData : todo))
     );
+    if (res.status === 400) {
+      console.log(res.data);
+    }
   };
 
   const deleteTodo = async (id: string) => {
     const res = await axios.delete(`/todos/${id}`);
-    // if (res.status !== 200) {
-    //   toast.error("Something went wrong");
-    // }
+    if (res.status === 400) {
+      console.log(res.data);
+    }
   };
 
   const todoDone = async (id: string, type: boolean) => {
     const res = await axios.patch(`/todos/${id}`, { isDone: type });
-    //console.log(res.data);
+    if (res.status === 400) {
+      console.log(res.data);
+    }
   };
 
   const modal = (condition: boolean) => {

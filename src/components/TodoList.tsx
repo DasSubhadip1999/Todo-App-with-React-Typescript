@@ -12,6 +12,7 @@ const TodoList: React.FC = () => {
 
   useEffect(() => {
     todoContext?.getTodos();
+    // eslint-disable-next-line
   }, [todoContext?.todos]);
 
   return (
@@ -19,7 +20,7 @@ const TodoList: React.FC = () => {
       <h1 className="text-center font-bold text-xl text-white py-3 bg-[#3F0071] stroke-slate-100">
         Todo List
       </h1>
-      <div className="max-h-80 overflow-y-auto">
+      <div className="max-h-80 overflow-y-auto md:mx-[14%] md:mt-2">
         <AnimatePresence>
           {todoContext?.todos.map((todo) => (
             <motion.div
